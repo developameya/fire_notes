@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 
-import '../core/failures.dart';
+import '../core/value_failures.dart';
 import '../core/value_object.dart';
 import '../core/value_validators.dart';
 
