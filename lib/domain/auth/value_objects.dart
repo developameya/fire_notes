@@ -8,7 +8,7 @@ import '../core/value_validators.dart';
 class EmailAddress extends ValueObject<String> {
   ///The email address string or the failure string in case the validation fails.
 
-  // ignore: annotate_overrides
+  @override
   final Either<ValueFailure<String>, String> value;
 
   ///Accepts a string and checks whether the String is a valid Email.
@@ -20,7 +20,7 @@ class EmailAddress extends ValueObject<String> {
 
 class Password extends ValueObject<String> {
   ///The email address string or the failure string in case the validation fails.
-  // ignore: annotate_overrides
+  @override
   final Either<ValueFailure<String>, String> value;
 
   ///Accepts a string and checks whether the String is a valid Password.
