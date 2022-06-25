@@ -4,7 +4,9 @@ import 'package:fire_notes/domain/auth/i_auth_facade.dart';
 import 'package:fire_notes/domain/auth/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: IAuthFacade)
 class FireBaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _auth;
   final GoogleSignIn _gSignIn;
@@ -55,11 +57,12 @@ class FireBaseAuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
     try {
       final gUser = await _gSignIn.signIn();
+
       if (gUser == null) {
-        left(const AuthFailure.cancelledByUser());
+        return left(const AuthFailure.cancelledByUser());
       }
 
-      final gAuth = await gUser!.authentication;
+      final gAuth = await gUser.authentication;
 
       final authCred = GoogleAuthProvider.credential(
           idToken: gAuth.idToken, accessToken: gAuth.accessToken);
