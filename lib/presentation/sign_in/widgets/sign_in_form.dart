@@ -12,7 +12,6 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
-        debugPrint('flush');
         state.authFailOrSuccessOption.fold(
           () {},
           (either) => either.fold(
