@@ -1,0 +1,7 @@
+Version: 0.1.0+1
+
+This is the first release of the app.
+
+This version of fire notes has auth UI which validates data submitted in the form fields.
+
+The Google Sign-in button will create a user in the backend with google credentials but the app in not listening to auth response at the moment.
