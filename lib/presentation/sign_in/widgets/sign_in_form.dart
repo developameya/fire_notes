@@ -18,7 +18,7 @@ class SignInForm extends StatelessWidget {
             (f) {
               RoundedFlushBar.createRoundedErrorBar(
                 message: f.map(
-                  cancelledByUser: (_) => 'Cancelled.',
+                  cancelledByUser: (_) => 'Google Sign in cancelled.',
                   serverError: (_) => 'Server Error.',
                   emailAlreadyInUse: (_) => 'Email already in use.',
                   invalidEmailAndPasswordCombination: (_) =>
@@ -35,17 +35,20 @@ class SignInForm extends StatelessWidget {
       builder: (context, state) {
         return Form(
             autovalidateMode: state.showErrorMessage,
-            child: ListView(
-              children: const [
-                _Header(),
-                SizedBox(height: 8.0),
-                _EmailField(),
-                SizedBox(height: 8.0),
-                _PasswordField(),
-                _EmailAndPasswordAuthButtons(),
-                SizedBox(height: 8.0),
-                _GoogleSignInButton()
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: ListView(
+                children: const [
+                  _Header(),
+                  SizedBox(height: 8.0),
+                  _EmailField(),
+                  SizedBox(height: 8.0),
+                  _PasswordField(),
+                  _EmailAndPasswordAuthButtons(),
+                  SizedBox(height: 8.0),
+                  _GoogleSignInButton()
+                ],
+              ),
             ));
       },
     );

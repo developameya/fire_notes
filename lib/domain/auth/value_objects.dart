@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
+import 'package:uuid/uuid.dart';
 
 import '../core/value_failures.dart';
 import '../core/value_object.dart';
@@ -27,4 +28,17 @@ class Password extends ValueObject<String> {
   factory Password(String input) => Password._(value: validatePassword(input));
 
   const Password._({required this.value});
+}
+
+class Uid extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  ///This factory method will create an unique ID value object with UUID automatically.
+  factory Uid() => Uid._(right(const Uuid().v1()));
+
+  ///This factory method requires an uid string to be passed to create an unique value object.
+  factory Uid.fromUid(String uid) => Uid._(right(uid));
+
+  const Uid._(this.value);
 }
