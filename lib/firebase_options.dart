@@ -53,6 +53,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '946314436203',
     projectId: 'fire-notes-ce334',
     storageBucket: 'fire-notes-ce334.appspot.com',
+    androidClientId: '946314436203-3elt98fdf3hqmnnqk96v8shaoabjk4a0.apps.googleusercontent.com',
     iosClientId: '946314436203-m2na4boaahhovaoah8anhovt3qngoh07.apps.googleusercontent.com',
     iosBundleId: 'com.appup.fireNotes',
   );
