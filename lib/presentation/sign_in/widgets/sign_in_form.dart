@@ -38,15 +38,19 @@ class SignInForm extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: ListView(
-                children: const [
-                  _Header(),
-                  SizedBox(height: 8.0),
-                  _EmailField(),
-                  SizedBox(height: 8.0),
-                  _PasswordField(),
-                  _EmailAndPasswordAuthButtons(),
-                  SizedBox(height: 8.0),
-                  _GoogleSignInButton()
+                children: [
+                  const _Header(),
+                  const SizedBox(height: 8.0),
+                  const _EmailField(),
+                  const SizedBox(height: 8.0),
+                  const _PasswordField(),
+                  const _EmailAndPasswordAuthButtons(),
+                  const SizedBox(height: 8.0),
+                  const _GoogleSignInButton(),
+                  if (state.isSubmitting) ...[
+                    const SizedBox(height: 10),
+                    const LinearProgressIndicator()
+                  ],
                 ],
               ),
             ));
@@ -134,7 +138,10 @@ class _PasswordField extends StatelessWidget {
       onChanged: (value) => bloc.add(SignInFormEvent.passwordChanged(value)),
       validator: (_) => bloc.state.password.value.fold(
         (f) => f.maybeMap(
-          shortPassword: (_) => 'Short password',
+          auth: (value) => value.failure.maybeMap(
+            shortPassword: (_) => 'Short Password',
+            orElse: () => null,
+          ),
           orElse: () => null,
         ),
         (r) => null,
@@ -162,7 +169,10 @@ class _EmailField extends StatelessWidget {
       //If we use 'map' on 'f(failure)' then we've to return a function for faliure of each object. Instead, we'll use 'maybeMap' where, we return a function for the failure of the current object and return a common function for every other failure.
       validator: (_) => bloc.state.emailAddress.value.fold(
         (f) => f.maybeMap(
-          invalidEmail: (_) => 'Invalid Email',
+          auth: (value) => value.failure.maybeMap(
+            invalidEmail: (value) => 'Invalid Email',
+            orElse: () => null,
+          ),
           orElse: () => null,
         ),
         (_) => null,
