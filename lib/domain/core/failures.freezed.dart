@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'value_failures.dart';
+part of 'failures.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -720,7 +720,7 @@ mixin _$NotesValueFailure<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue) empty,
     required TResult Function(T failedValue) multiline,
-    required TResult Function(T failedValue) listTooLong,
+    required TResult Function(T failedValue, int maxLength) listTooLong,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -728,7 +728,7 @@ mixin _$NotesValueFailure<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -736,7 +736,7 @@ mixin _$NotesValueFailure<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -883,7 +883,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue) empty,
     required TResult Function(T failedValue) multiline,
-    required TResult Function(T failedValue) listTooLong,
+    required TResult Function(T failedValue, int maxLength) listTooLong,
   }) {
     return exceedingLength(failedValue, maxLength);
   }
@@ -894,7 +894,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
   }) {
     return exceedingLength?.call(failedValue, maxLength);
   }
@@ -905,7 +905,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -1035,7 +1035,7 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue) empty,
     required TResult Function(T failedValue) multiline,
-    required TResult Function(T failedValue) listTooLong,
+    required TResult Function(T failedValue, int maxLength) listTooLong,
   }) {
     return empty(failedValue);
   }
@@ -1046,7 +1046,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
   }) {
     return empty?.call(failedValue);
   }
@@ -1057,7 +1057,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -1186,7 +1186,7 @@ class _$Multiline<T> implements Multiline<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue) empty,
     required TResult Function(T failedValue) multiline,
-    required TResult Function(T failedValue) listTooLong,
+    required TResult Function(T failedValue, int maxLength) listTooLong,
   }) {
     return multiline(failedValue);
   }
@@ -1197,7 +1197,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
   }) {
     return multiline?.call(failedValue);
   }
@@ -1208,7 +1208,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
     required TResult orElse(),
   }) {
     if (multiline != null) {
@@ -1273,7 +1273,7 @@ abstract class _$$ListTooLongCopyWith<T, $Res>
           _$ListTooLong<T> value, $Res Function(_$ListTooLong<T>) then) =
       __$$ListTooLongCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({T failedValue, int maxLength});
 }
 
 /// @nodoc
@@ -1290,12 +1290,17 @@ class __$$ListTooLongCopyWithImpl<T, $Res>
   @override
   $Res call({
     Object? failedValue = freezed,
+    Object? maxLength = freezed,
   }) {
     return _then(_$ListTooLong<T>(
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
+      maxLength: maxLength == freezed
+          ? _value.maxLength
+          : maxLength // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1303,14 +1308,16 @@ class __$$ListTooLongCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$ListTooLong<T> implements ListTooLong<T> {
-  const _$ListTooLong({required this.failedValue});
+  const _$ListTooLong({required this.failedValue, required this.maxLength});
 
   @override
   final T failedValue;
+  @override
+  final int maxLength;
 
   @override
   String toString() {
-    return 'NotesValueFailure<$T>.listTooLong(failedValue: $failedValue)';
+    return 'NotesValueFailure<$T>.listTooLong(failedValue: $failedValue, maxLength: $maxLength)';
   }
 
   @override
@@ -1319,12 +1326,15 @@ class _$ListTooLong<T> implements ListTooLong<T> {
         (other.runtimeType == runtimeType &&
             other is _$ListTooLong<T> &&
             const DeepCollectionEquality()
-                .equals(other.failedValue, failedValue));
+                .equals(other.failedValue, failedValue) &&
+            const DeepCollectionEquality().equals(other.maxLength, maxLength));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failedValue));
+      runtimeType,
+      const DeepCollectionEquality().hash(failedValue),
+      const DeepCollectionEquality().hash(maxLength));
 
   @JsonKey(ignore: true)
   @override
@@ -1337,9 +1347,9 @@ class _$ListTooLong<T> implements ListTooLong<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue) empty,
     required TResult Function(T failedValue) multiline,
-    required TResult Function(T failedValue) listTooLong,
+    required TResult Function(T failedValue, int maxLength) listTooLong,
   }) {
-    return listTooLong(failedValue);
+    return listTooLong(failedValue, maxLength);
   }
 
   @override
@@ -1348,9 +1358,9 @@ class _$ListTooLong<T> implements ListTooLong<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
   }) {
-    return listTooLong?.call(failedValue);
+    return listTooLong?.call(failedValue, maxLength);
   }
 
   @override
@@ -1359,11 +1369,11 @@ class _$ListTooLong<T> implements ListTooLong<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue)? empty,
     TResult Function(T failedValue)? multiline,
-    TResult Function(T failedValue)? listTooLong,
+    TResult Function(T failedValue, int maxLength)? listTooLong,
     required TResult orElse(),
   }) {
     if (listTooLong != null) {
-      return listTooLong(failedValue);
+      return listTooLong(failedValue, maxLength);
     }
     return orElse();
   }
@@ -1407,10 +1417,13 @@ class _$ListTooLong<T> implements ListTooLong<T> {
 }
 
 abstract class ListTooLong<T> implements NotesValueFailure<T> {
-  const factory ListTooLong({required final T failedValue}) = _$ListTooLong<T>;
+  const factory ListTooLong(
+      {required final T failedValue,
+      required final int maxLength}) = _$ListTooLong<T>;
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
+  int get maxLength => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$ListTooLongCopyWith<T, _$ListTooLong<T>> get copyWith =>

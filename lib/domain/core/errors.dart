@@ -1,4 +1,4 @@
-import 'package:fire_notes/domain/core/value_failures.dart';
+import 'package:fire_notes/domain/core/failures.dart';
 
 class UnexpectedValueError extends Error {
   final ValueFailure valueFailure;

@@ -2,7 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:uuid/uuid.dart';
 
-import '../core/value_failures.dart';
+import '../core/failures.dart';
 import '../core/value_object.dart';
 import '../core/value_validators.dart';
 
