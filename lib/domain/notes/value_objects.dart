@@ -44,9 +44,11 @@ class LimitedLengthList<T> extends ValueObject<KtList<T>> {
 
   static const int maxLength = 3;
 
-  factory LimitedLengthList(KtList<T> input) {
-    return LimitedLengthList._(validateListLength(input, maxLength));
-  }
+  factory LimitedLengthList(KtList<T> input) =>
+      LimitedLengthList._(validateListLength(input, maxLength));
+
+  factory LimitedLengthList.from([Iterable<T> elements = const []]) =>
+      LimitedLengthList(KtList.from(elements));
 
   const LimitedLengthList._(this.value);
 
