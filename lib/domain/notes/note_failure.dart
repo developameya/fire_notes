@@ -3,5 +3,7 @@ part 'note_failure.freezed.dart';
 
 @freezed
 abstract class NoteFailure with _$NoteFailure {
+  const factory NoteFailure.insufficientPermissions() =
+      _InsufficientPermissions;
   const factory NoteFailure.unexpected() = _Unexpected;
 }

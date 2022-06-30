@@ -5,7 +5,7 @@ import 'package:fire_notes/domain/auth/value_objects.dart';
 import 'package:fire_notes/domain/notes/todo_item.dart';
 import 'package:fire_notes/domain/notes/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:kt_dart/kt.dart';
 import '../../domain/notes/note.dart';
 part 'data_transfer_objects.freezed.dart';
 part 'data_transfer_objects.g.dart';
@@ -42,12 +42,12 @@ abstract class NoteDTO implements _$NoteDTO {
     return Note(
       uid: Uid.fromUid(uid!),
       body: NoteBody(body),
-      todos: LimitedLengthList.from(
+      todos: LimitedLengthList(
         todos
             .map(
               (todoItemDto) => todoItemDto.toDomain(),
             )
-            .toList(),
+            .toImmutableList(),
       ),
       color: NoteColour(Color(color)),
     );
