@@ -77,20 +77,58 @@ class NoteRepository implements INoteRepository {
   }
 
   @override
-  Future<Either<NoteFailure, Unit>> create(Note note) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<Either<NoteFailure, Unit>> create(Note note) async {
+    final userDoc = await _db.userDocument();
+    final noteDTO = NoteDTO.fromDomain(note);
+    try {
+      await userDoc.noteCollection.doc(noteDTO.uid).set(noteDTO.toJson());
+      return right(unit);
+    } on FirebaseException catch (error) {
+      if (error.message!.contains('not-found')) {
+        return left(const NoteFailure.unableToUpdate());
+      } else if (error.message!.contains('permission-denined')) {
+        return left(const NoteFailure.insufficientPermissions());
+      } else {
+        return left(const NoteFailure.unexpected());
+      }
+    }
   }
 
   @override
-  Future<Either<NoteFailure, Unit>> delete(Note note) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<NoteFailure, Unit>> update(Note note) async {
+    final userDoc = await _db.userDocument();
+    final noteDTO = NoteDTO.fromDomain(note);
+    try {
+      await userDoc.noteCollection.doc(noteDTO.uid).update(noteDTO.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (error) {
+      if (error.message!.contains('not-found')) {
+        return left(const NoteFailure.unableToUpdate());
+      } else if (error.message!.contains('permission-denined')) {
+        return left(const NoteFailure.insufficientPermissions());
+      } else {
+        return left(const NoteFailure.unexpected());
+      }
+    }
   }
 
   @override
-  Future<Either<NoteFailure, Unit>> update(Note note) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Either<NoteFailure, Unit>> delete(Note note) async {
+    final userDoc = await _db.userDocument();
+    final noteId = note.uid.getOrCrash();
+
+    try {
+      await userDoc.noteCollection.doc(noteId).delete();
+      return right(unit);
+    } on FirebaseException catch (error) {
+      if (error.message!.contains('not-found')) {
+        return left(const NoteFailure.unableToUpdate());
+      } else if (error.message!.contains('permission-denined')) {
+        return left(const NoteFailure.insufficientPermissions());
+      } else {
+        return left(const NoteFailure.unexpected());
+      }
+    }
   }
 }
