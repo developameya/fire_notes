@@ -10,14 +10,15 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/auth_bloc.dart' as _i13;
-import 'application/auth/sign_in_form/bloc/sign_in_form_bloc.dart' as _i12;
-import 'application/notes/list_actor/note_list_actor_bloc.dart' as _i10;
-import 'application/notes/list_watcher/note_list_watcher_bloc.dart' as _i11;
+import 'application/auth/auth_bloc.dart' as _i14;
+import 'application/auth/sign_in_form/bloc/sign_in_form_bloc.dart' as _i13;
+import 'application/notes/form/note_form_bloc.dart' as _i10;
+import 'application/notes/list_actor/note_list_actor_bloc.dart' as _i11;
+import 'application/notes/list_watcher/note_list_watcher_bloc.dart' as _i12;
 import 'domain/auth/i_auth_facade.dart' as _i6;
 import 'domain/notes/i_note_repository.dart' as _i8;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i7;
-import 'infrastructure/core/firebase_injectable_module.dart' as _i14;
+import 'infrastructure/core/firebase_injectable_module.dart' as _i15;
 import 'infrastructure/notes/note_repository.dart'
     as _i9; // ignore_for_file: unnecessary_lambdas
 
@@ -37,14 +38,16 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       _i7.FireBaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i5.GoogleSignIn>()));
   gh.lazySingleton<_i8.INoteRepository>(
       () => _i9.NoteRepository(get<_i4.FirebaseFirestore>()));
-  gh.factory<_i10.NoteListActorBloc>(
-      () => _i10.NoteListActorBloc(get<_i8.INoteRepository>()));
-  gh.factory<_i11.NoteListWatcherBloc>(
-      () => _i11.NoteListWatcherBloc(get<_i8.INoteRepository>()));
-  gh.factory<_i12.SignInFormBloc>(
-      () => _i12.SignInFormBloc(get<_i6.IAuthFacade>()));
-  gh.factory<_i13.AuthBloc>(() => _i13.AuthBloc(get<_i6.IAuthFacade>()));
+  gh.factory<_i10.NoteFormBloc>(
+      () => _i10.NoteFormBloc(get<_i8.INoteRepository>()));
+  gh.factory<_i11.NoteListActorBloc>(
+      () => _i11.NoteListActorBloc(get<_i8.INoteRepository>()));
+  gh.factory<_i12.NoteListWatcherBloc>(
+      () => _i12.NoteListWatcherBloc(get<_i8.INoteRepository>()));
+  gh.factory<_i13.SignInFormBloc>(
+      () => _i13.SignInFormBloc(get<_i6.IAuthFacade>()));
+  gh.factory<_i14.AuthBloc>(() => _i14.AuthBloc(get<_i6.IAuthFacade>()));
   return get;
 }
 
-class _$FireBaseInjectableModule extends _i14.FireBaseInjectableModule {}
+class _$FireBaseInjectableModule extends _i15.FireBaseInjectableModule {}
