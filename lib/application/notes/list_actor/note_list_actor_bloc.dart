@@ -13,6 +13,7 @@ part 'note_list_actor_bloc.freezed.dart';
 @injectable
 class NoteListActorBloc extends Bloc<NoteListActorEvent, NoteListActorState> {
   final INoteRepository _noteRepo;
+
   NoteListActorBloc(this._noteRepo) : super(const _Initial()) {
     on<_Deleted>(_mapDeleted);
   }

@@ -15,13 +15,13 @@ part 'auth_bloc.freezed.dart';
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _authFacade;
-  late StreamSubscription<Option<User>> _userStateSub;
+  late StreamSubscription<Option<User>> _userOptionSub;
 
   AuthBloc(this._authFacade) : super(const _Initial()) {
     on<_AuthCheckRequested>(_mapAuthCheckRequested);
     on<_SignedOut>(_mapSignedOut);
     on<_AuthStateChanged>(_onAuthStateChanged);
-    _userStateSub = _authFacade.getSignedInUser.listen(
+    _userOptionSub = _authFacade.getSignedInUser.listen(
       (userOption) => add(
         AuthEvent.authStateChanged(userOption),
       ),
@@ -29,8 +29,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _onAuthStateChanged(_AuthStateChanged event, Emitter<AuthState> emit) {
-    event.userOption.fold(() => emit(const AuthState.unauthenticated()),
-        (_) => const AuthState.authenticated());
+    event.userOption.fold(
+      () => emit(
+        const AuthState.unauthenticated(),
+      ),
+      (_) => emit(
+        const AuthState.authenticated(),
+      ),
+    );
   }
 
   Future<void> _mapAuthCheckRequested(
@@ -50,7 +56,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   @override
   Future<void> close() {
-    _userStateSub.cancel();
+    _userOptionSub.cancel();
     return super.close();
   }
 }

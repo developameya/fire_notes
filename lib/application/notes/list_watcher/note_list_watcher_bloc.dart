@@ -25,6 +25,8 @@ class NoteListWatcherBloc
     on<_WatchAllStarted>(_mapWatchAllStarted);
     on<_WatchIncompletedStarted>(_mapWatchIncompletedStarted);
     on<_NotesRecieved>(_mapNotesRecieved);
+
+    add(const NoteListWatcherEvent.watchAllStarted());
   }
 
   void _mapWatchAllStarted(
@@ -63,5 +65,11 @@ class NoteListWatcherBloc
       (failure) => emit(NoteListWatcherState.failure(failure)),
       (notes) => emit(NoteListWatcherState.success(notes)),
     );
+  }
+
+  @override
+  Future<void> close() {
+    _notesSubscription?.cancel();
+    return super.close();
   }
 }
