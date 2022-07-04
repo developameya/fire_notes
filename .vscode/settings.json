@@ -9,5 +9,6 @@
         ".dart_tool": true,
         ".idea": true
     },
-    "explorerExclude.backup": null
+    "explorerExclude.backup": null,
+    "cmake.configureOnOpen": false
 }

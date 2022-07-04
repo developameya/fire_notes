@@ -15,19 +15,17 @@ class SignInForm extends StatelessWidget {
         state.authFailOrSuccessOption.fold(
           () {},
           (either) => either.fold(
-            (f) {
-              RoundedFlushBar.createRoundedErrorBar(
-                message: f.map(
-                  cancelledByUser: (_) => 'Google Sign in cancelled.',
-                  serverError: (_) => 'Server Error.',
-                  emailAlreadyInUse: (_) => 'Email already in use.',
-                  invalidEmailAndPasswordCombination: (_) =>
-                      'Invalid email and password combination.',
-                  operationNotAllowed: (_) => 'Operation not allowed.',
-                  weakPassword: (_) => 'Weak password.',
-                ),
-              ).show(context);
-            },
+            (failure) => RoundedFlushBar.createRoundedErrorBar(
+              message: failure.map(
+                cancelledByUser: (_) => 'Google Sign in cancelled.',
+                serverError: (_) => 'Server Error.',
+                emailAlreadyInUse: (_) => 'Email already in use.',
+                invalidEmailAndPasswordCombination: (_) =>
+                    'Invalid email and password combination.',
+                operationNotAllowed: (_) => 'Operation not allowed.',
+                weakPassword: (_) => 'Weak password.',
+              ),
+            ).show(context),
             (_) {},
           ),
         );
@@ -137,7 +135,7 @@ class _PasswordField extends StatelessWidget {
       obscureText: true,
       onChanged: (value) => bloc.add(SignInFormEvent.passwordChanged(value)),
       validator: (_) => bloc.state.password.value.fold(
-        (f) => f.maybeMap(
+        (failure) => failure.maybeMap(
           auth: (value) => value.failure.maybeMap(
             shortPassword: (_) => 'Short Password',
             orElse: () => null,

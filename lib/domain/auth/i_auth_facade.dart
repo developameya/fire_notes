@@ -14,7 +14,11 @@ import 'package:fire_notes/domain/auth/value_objects.dart';
 abstract class IAuthFacade {
   //'Unit' is similar to 'Void' in Swift, which means it's an class which returns an empty tuple, unlike the 'void' keyword in dart.
   //The reason we use 'option' instead of 'either' is that there are only two possible response from the auth service, either the user is signed in or not.
-  Future<Option<User>> getSignedInUser();
+  /// Listens the to change in the state of the user's authentication and returns [User] if authenticated or [none()] otherwise.
+  Stream<Option<User>> get getSignedInUser;
+
+  ///Return the cached version of the SignedInUser.
+  Future<Option<User>> get getCurrentUser;
   //The reason we use 'Either' with 'AuthFailure' instead of 'option' is that there can be many different 'AuthFailure' returned by the register/sign-in method of the auth service.
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
       {required EmailAddress emailAddress, required Password password});

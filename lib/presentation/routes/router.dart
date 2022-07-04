@@ -17,9 +17,12 @@ final GoRouter router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(
-        path: Routes.root.path, builder: (context, state) => Routes.root.page),
+      path: Routes.root.path,
+      builder: (context, state) => Routes.root.page,
+    ),
     GoRoute(
-        path: Routes.signIn.path,
-        builder: (context, state) => Routes.signIn.page),
+      path: Routes.signIn.path,
+      builder: (context, state) => Routes.signIn.page,
+    ),
   ],
 );

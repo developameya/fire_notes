@@ -10,8 +10,7 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   ///Returns the user document for the logged in [User]
   ///Otherwise throws a [NotAuthenticatedError]
   Future<DocumentReference> userDocument() async {
-    final Option<User> userOption =
-        await getIt<IAuthFacade>().getSignedInUser();
+    final Option<User> userOption = await getIt<IAuthFacade>().getCurrentUser;
     final User user = userOption.getOrElse(
       () => throw NotAuthenticatedError(),
     );
