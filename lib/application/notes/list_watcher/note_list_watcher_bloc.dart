@@ -18,8 +18,7 @@ part 'note_list_watcher_bloc.freezed.dart';
 class NoteListWatcherBloc
     extends Bloc<NoteListWatcherEvent, NoteListWatcherState> {
   final INoteRepository _noteRepo;
-  late StreamSubscription<Either<NoteFailure, KtList<Note>>>?
-      _notesSubscription;
+  StreamSubscription<Either<NoteFailure, KtList<Note>>>? _notesSubscription;
 
   NoteListWatcherBloc(this._noteRepo) : super(const _Initial()) {
     on<_WatchAllStarted>(_mapWatchAllStarted);

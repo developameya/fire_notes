@@ -1,6 +1,7 @@
 import 'package:fire_notes/application/auth/auth_bloc.dart';
 import 'package:fire_notes/application/notes/list_actor/note_list_actor_bloc.dart';
 import 'package:fire_notes/application/notes/list_watcher/note_list_watcher_bloc.dart';
+import 'package:fire_notes/presentation/notes/notes_overview/notes_overview_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -62,6 +63,7 @@ class _BuildScaffold extends StatelessWidget {
           child: const Icon(Icons.add),
           onPressed: () {},
         ),
+        body: const NotesoverviewBody(),
       ),
     );
   }
