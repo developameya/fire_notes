@@ -2,6 +2,7 @@ import 'package:fire_notes/application/auth/auth_bloc.dart';
 import 'package:fire_notes/application/notes/list_actor/note_list_actor_bloc.dart';
 import 'package:fire_notes/application/notes/list_watcher/note_list_watcher_bloc.dart';
 import 'package:fire_notes/presentation/notes/notes_overview/notes_overview_body.dart';
+import 'package:fire_notes/presentation/notes/notes_overview/widgets/uncompleted_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,7 +40,7 @@ class _BuildScaffold extends StatelessWidget {
             insufficientPermissions: (_) => 'Inssuficient permissons.',
             unableToUpdate: (_) => 'Impossible error',
             unexpected: (_) =>
-                'Unexpected error ouccured while deleting, please contact support'),
+                'Unexpected error ouccured while deleting, please contact support.'),
         orElse: () {
           return null;
         },
@@ -53,10 +54,7 @@ class _BuildScaffold extends StatelessWidget {
                 context.read<AuthBloc>().add(AuthEvent.signedOut()),
           ),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.indeterminate_check_box),
-              onPressed: () {},
-            ),
+            UncompletedSwitch(),
           ],
         ),
         floatingActionButton: FloatingActionButton(

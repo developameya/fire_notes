@@ -30,8 +30,14 @@ class TodoName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
+  static const maxLength = 30;
+
   factory TodoName(String input) {
-    return TodoName._(validateSinglelineString(input));
+    return TodoName._(
+      validateStringLength(input, maxLength)
+          .flatMap(validateStringNotEmpty)
+          .flatMap(validateSinglelineString),
+    );
   }
 
   const TodoName._(this.value);

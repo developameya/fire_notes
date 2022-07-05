@@ -1,4 +1,6 @@
 import 'package:fire_notes/presentation/core/widgets/centered_message.dart';
+import 'package:fire_notes/presentation/notes/notes_overview/widgets/error_card.dart';
+import 'package:fire_notes/presentation/notes/notes_overview/widgets/note_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,10 +24,9 @@ class NotesoverviewBody extends StatelessWidget {
               itemBuilder: (context, index) {
                 final Note note = state.notes[index];
                 if (note.failureOption.isSome()) {
-                  return Container(color: Colors.red, height: 100, width: 100);
+                  return ErrorCard(note: note);
                 } else {
-                  return Container(
-                      color: Colors.green, height: 100, width: 100);
+                  return NoteCard(note: note);
                 }
               },
             );

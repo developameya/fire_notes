@@ -29,10 +29,19 @@ class _BuildApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Fire Notes',
       theme: ThemeData.light().copyWith(
-          primaryColor: Colors.amber,
-          inputDecorationTheme: const InputDecorationTheme(
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))))),
+        primaryColor: Colors.amber,
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.amber),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.amber.shade900,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+          ),
+        ),
+      ),
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
       routerDelegate: router.routerDelegate,
