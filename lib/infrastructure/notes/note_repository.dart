@@ -17,7 +17,7 @@ class NoteRepository implements INoteRepository {
   Stream<Either<NoteFailure, KtList<Note>>> watchAll() async* {
     final userDoc = await _db.userDocument();
     yield* userDoc.noteCollection
-        .orderBy('serverTimeStamp')
+        .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map((snapshot) => right<NoteFailure, KtList<Note>>(
               snapshot.docs

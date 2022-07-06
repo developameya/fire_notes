@@ -31,6 +31,7 @@ abstract class Note implements _$Note {
 
   Option<ValueFailure<dynamic>> get failureOption {
     return body.getFailureOrUnit
+        .andThen(color.getFailureOrUnit)
         .andThen(todos.getFailureOrUnit)
         .andThen(
           todos
@@ -43,10 +44,7 @@ abstract class Note implements _$Note {
               //Here the 'getOrElse' means, if we cannot get any item at '0'th index, then the list is empty, which means the list is valid, so return 'none()' for the option.
               .getOrElse(0, (_) => none())
               //If at this point the 'getOrElse' binding returns 'none', then provide right value as 'unit' otherwise provide left value as 'valueFailure<dynamic>' from the filtered list.
-              .fold(
-                () => right(unit),
-                (failure) => left(failure),
-              ),
+              .fold(() => right(unit), (failure) => left(failure)),
         )
         .fold((failure) => some(failure), (_) => none());
   }

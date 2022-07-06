@@ -32,26 +32,27 @@ class SignInForm extends StatelessWidget {
       },
       builder: (context, state) {
         return Form(
-            autovalidateMode: state.showErrorMessage,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: ListView(
-                children: [
-                  const _Header(),
-                  const SizedBox(height: 8.0),
-                  const _EmailField(),
-                  const SizedBox(height: 8.0),
-                  const _PasswordField(),
-                  const _EmailAndPasswordAuthButtons(),
-                  const SizedBox(height: 8.0),
-                  const _GoogleSignInButton(),
-                  if (state.isSubmitting) ...[
-                    const SizedBox(height: 10),
-                    const LinearProgressIndicator()
-                  ],
+          autovalidateMode: state.showErrorMessage,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: ListView(
+              children: [
+                const _Header(),
+                const SizedBox(height: 8.0),
+                const _EmailField(),
+                const SizedBox(height: 8.0),
+                const _PasswordField(),
+                const _EmailAndPasswordAuthButtons(),
+                const SizedBox(height: 8.0),
+                const _GoogleSignInButton(),
+                if (state.isSubmitting) ...[
+                  const SizedBox(height: 10),
+                  const LinearProgressIndicator()
                 ],
-              ),
-            ));
+              ],
+            ),
+          ),
+        );
       },
     );
   }

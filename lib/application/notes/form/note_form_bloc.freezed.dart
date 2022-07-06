@@ -839,7 +839,7 @@ mixin _$NoteFormState {
   AutovalidateMode get showErrorMessage => throw _privateConstructorUsedError;
   bool get isEditing => throw _privateConstructorUsedError;
   bool get isSaving => throw _privateConstructorUsedError;
-  Option<Either<NoteFailure, Unit>> get noteFailOrSuccessOption =>
+  Option<Either<NoteFailure, Unit>> get saveFailOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -857,7 +857,7 @@ abstract class $NoteFormStateCopyWith<$Res> {
       AutovalidateMode showErrorMessage,
       bool isEditing,
       bool isSaving,
-      Option<Either<NoteFailure, Unit>> noteFailOrSuccessOption});
+      Option<Either<NoteFailure, Unit>> saveFailOrSuccessOption});
 
   $NoteCopyWith<$Res> get note;
 }
@@ -877,7 +877,7 @@ class _$NoteFormStateCopyWithImpl<$Res>
     Object? showErrorMessage = freezed,
     Object? isEditing = freezed,
     Object? isSaving = freezed,
-    Object? noteFailOrSuccessOption = freezed,
+    Object? saveFailOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
       note: note == freezed
@@ -896,9 +896,9 @@ class _$NoteFormStateCopyWithImpl<$Res>
           ? _value.isSaving
           : isSaving // ignore: cast_nullable_to_non_nullable
               as bool,
-      noteFailOrSuccessOption: noteFailOrSuccessOption == freezed
-          ? _value.noteFailOrSuccessOption
-          : noteFailOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      saveFailOrSuccessOption: saveFailOrSuccessOption == freezed
+          ? _value.saveFailOrSuccessOption
+          : saveFailOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<NoteFailure, Unit>>,
     ));
   }
@@ -923,7 +923,7 @@ abstract class _$$_NoteFormStateCopyWith<$Res>
       AutovalidateMode showErrorMessage,
       bool isEditing,
       bool isSaving,
-      Option<Either<NoteFailure, Unit>> noteFailOrSuccessOption});
+      Option<Either<NoteFailure, Unit>> saveFailOrSuccessOption});
 
   @override
   $NoteCopyWith<$Res> get note;
@@ -946,7 +946,7 @@ class __$$_NoteFormStateCopyWithImpl<$Res>
     Object? showErrorMessage = freezed,
     Object? isEditing = freezed,
     Object? isSaving = freezed,
-    Object? noteFailOrSuccessOption = freezed,
+    Object? saveFailOrSuccessOption = freezed,
   }) {
     return _then(_$_NoteFormState(
       note: note == freezed
@@ -965,9 +965,9 @@ class __$$_NoteFormStateCopyWithImpl<$Res>
           ? _value.isSaving
           : isSaving // ignore: cast_nullable_to_non_nullable
               as bool,
-      noteFailOrSuccessOption: noteFailOrSuccessOption == freezed
-          ? _value.noteFailOrSuccessOption
-          : noteFailOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      saveFailOrSuccessOption: saveFailOrSuccessOption == freezed
+          ? _value.saveFailOrSuccessOption
+          : saveFailOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<NoteFailure, Unit>>,
     ));
   }
@@ -981,7 +981,7 @@ class _$_NoteFormState implements _NoteFormState {
       required this.showErrorMessage,
       required this.isEditing,
       required this.isSaving,
-      required this.noteFailOrSuccessOption});
+      required this.saveFailOrSuccessOption});
 
   @override
   final Note note;
@@ -992,11 +992,11 @@ class _$_NoteFormState implements _NoteFormState {
   @override
   final bool isSaving;
   @override
-  final Option<Either<NoteFailure, Unit>> noteFailOrSuccessOption;
+  final Option<Either<NoteFailure, Unit>> saveFailOrSuccessOption;
 
   @override
   String toString() {
-    return 'NoteFormState(note: $note, showErrorMessage: $showErrorMessage, isEditing: $isEditing, isSaving: $isSaving, noteFailOrSuccessOption: $noteFailOrSuccessOption)';
+    return 'NoteFormState(note: $note, showErrorMessage: $showErrorMessage, isEditing: $isEditing, isSaving: $isSaving, saveFailOrSuccessOption: $saveFailOrSuccessOption)';
   }
 
   @override
@@ -1010,7 +1010,7 @@ class _$_NoteFormState implements _NoteFormState {
             const DeepCollectionEquality().equals(other.isEditing, isEditing) &&
             const DeepCollectionEquality().equals(other.isSaving, isSaving) &&
             const DeepCollectionEquality().equals(
-                other.noteFailOrSuccessOption, noteFailOrSuccessOption));
+                other.saveFailOrSuccessOption, saveFailOrSuccessOption));
   }
 
   @override
@@ -1020,7 +1020,7 @@ class _$_NoteFormState implements _NoteFormState {
       const DeepCollectionEquality().hash(showErrorMessage),
       const DeepCollectionEquality().hash(isEditing),
       const DeepCollectionEquality().hash(isSaving),
-      const DeepCollectionEquality().hash(noteFailOrSuccessOption));
+      const DeepCollectionEquality().hash(saveFailOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
@@ -1035,7 +1035,7 @@ abstract class _NoteFormState implements NoteFormState {
       required final bool isEditing,
       required final bool isSaving,
       required final Option<Either<NoteFailure, Unit>>
-          noteFailOrSuccessOption}) = _$_NoteFormState;
+          saveFailOrSuccessOption}) = _$_NoteFormState;
 
   @override
   Note get note => throw _privateConstructorUsedError;
@@ -1046,7 +1046,7 @@ abstract class _NoteFormState implements NoteFormState {
   @override
   bool get isSaving => throw _privateConstructorUsedError;
   @override
-  Option<Either<NoteFailure, Unit>> get noteFailOrSuccessOption =>
+  Option<Either<NoteFailure, Unit>> get saveFailOrSuccessOption =>
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

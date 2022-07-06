@@ -2,6 +2,7 @@ import 'package:fire_notes/application/notes/list_actor/note_list_actor_bloc.dar
 import 'package:fire_notes/domain/notes/todo_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../domain/notes/note.dart';
 import 'package:kt_dart/collection.dart';
@@ -16,7 +17,7 @@ class NoteCard extends StatelessWidget {
     return Card(
       color: note.color.getOrCrash(),
       child: InkWell(
-        onTap: () {},
+        onTap: () => GoRouter.of(context).push('/noteForm', extra: note),
         onLongPress: () {
           _showDeletingDialog(context, bloc);
         },

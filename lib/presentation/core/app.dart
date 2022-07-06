@@ -34,8 +34,23 @@ class _BuildApp extends StatelessWidget {
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: Colors.amber.shade900,
         ),
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(
+        textSelectionTheme:
+            const TextSelectionThemeData(cursorColor: Colors.green),
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green.shade900),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+          ),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
             borderRadius: BorderRadius.all(
               Radius.circular(8.0),
             ),

@@ -7,7 +7,7 @@ class NoteFormState with _$NoteFormState {
     required AutovalidateMode showErrorMessage,
     required bool isEditing,
     required bool isSaving,
-    required Option<Either<NoteFailure, Unit>> noteFailOrSuccessOption,
+    required Option<Either<NoteFailure, Unit>> saveFailOrSuccessOption,
   }) = _NoteFormState;
 
   factory NoteFormState.initial() => NoteFormState(
@@ -15,6 +15,6 @@ class NoteFormState with _$NoteFormState {
         showErrorMessage: AutovalidateMode.disabled,
         isEditing: false,
         isSaving: false,
-        noteFailOrSuccessOption: none(),
+        saveFailOrSuccessOption: none(),
       );
 }

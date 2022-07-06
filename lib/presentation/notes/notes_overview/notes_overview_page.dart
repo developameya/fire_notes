@@ -1,10 +1,12 @@
 import 'package:fire_notes/application/auth/auth_bloc.dart';
 import 'package:fire_notes/application/notes/list_actor/note_list_actor_bloc.dart';
 import 'package:fire_notes/application/notes/list_watcher/note_list_watcher_bloc.dart';
+import 'package:fire_notes/presentation/core/widgets/rounded_flush_bar.dart';
 import 'package:fire_notes/presentation/notes/notes_overview/notes_overview_body.dart';
 import 'package:fire_notes/presentation/notes/notes_overview/widgets/uncompleted_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../injection.dart';
 
@@ -35,16 +37,21 @@ class _BuildScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<NoteListActorBloc, NoteListActorState>(
-      listener: (context, state) => state.maybeMap(
-        actionFailure: (state) => state.failure.map(
-            insufficientPermissions: (_) => 'Inssuficient permissons.',
-            unableToUpdate: (_) => 'Impossible error',
-            unexpected: (_) =>
-                'Unexpected error ouccured while deleting, please contact support.'),
-        orElse: () {
-          return null;
-        },
-      ),
+      listener: (context, state) {
+        state.maybeMap(
+          actionFailure: (state) => RoundedFlushBar.createRoundedErrorBar(
+            message: state.failure.map(
+              insufficientPermissions: (_) => 'Inssuficient permissons.',
+              unableToUpdate: (_) => 'Impossible error',
+              unexpected: (_) =>
+                  'Unexpected error ouccured while deleting, please contact support.',
+            ),
+          ).show(context),
+          orElse: () {
+            return null;
+          },
+        );
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Notes Overview'),
@@ -53,13 +60,13 @@ class _BuildScaffold extends StatelessWidget {
             onPressed: () =>
                 context.read<AuthBloc>().add(AuthEvent.signedOut()),
           ),
-          actions: [
+          actions: const [
             UncompletedSwitch(),
           ],
         ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () => GoRouter.of(context).push('/noteForm', extra: null),
         ),
         body: const NotesoverviewBody(),
       ),
