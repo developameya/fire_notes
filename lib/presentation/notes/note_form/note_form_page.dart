@@ -1,14 +1,17 @@
 import 'package:fire_notes/presentation/core/widgets/centered_message.dart';
 import 'package:fire_notes/presentation/core/widgets/rounded_flush_bar.dart';
+import 'package:fire_notes/presentation/notes/note_form/misc/todoitem_presentation_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../../application/notes/form/note_form_bloc.dart';
 import '../../../domain/notes/note.dart';
 import '../../../injection.dart';
 import 'widgets/body_field.dart';
 import 'widgets/colour_field.dart';
+import 'widgets/todo_tile.dart';
 
 class NoteFormPage extends StatelessWidget {
   final Note note;
@@ -97,14 +100,18 @@ class _BuildScaffold extends StatelessWidget {
       body: BlocBuilder<NoteFormBloc, NoteFormState>(
         buildWhen: (pre, curr) => pre.showErrorMessage != curr.showErrorMessage,
         builder: (context, state) {
-          return Form(
-            autovalidateMode: state.showErrorMessage,
-            child: SingleChildScrollView(
-              child: Column(
-                children: const [
-                  BodyField(),
-                  ColourField(),
-                ],
+          return ChangeNotifierProvider(
+            create: (BuildContext context) => FormTodos(),
+            child: Form(
+              autovalidateMode: state.showErrorMessage,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    BodyField(),
+                    ColourField(),
+                    TodoTile(),
+                  ],
+                ),
               ),
             ),
           );
