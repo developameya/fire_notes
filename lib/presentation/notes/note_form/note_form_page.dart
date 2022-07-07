@@ -8,6 +8,7 @@ import '../../../application/notes/form/note_form_bloc.dart';
 import '../../../domain/notes/note.dart';
 import '../../../injection.dart';
 import 'widgets/body_field.dart';
+import 'widgets/colour_field.dart';
 
 class NoteFormPage extends StatelessWidget {
   final Note note;
@@ -35,9 +36,9 @@ class _BuildBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NoteFormBloc, NoteFormState>(
       listenWhen: (pre, curr) =>
-          pre.noteFailOrSuccessOption != curr.noteFailOrSuccessOption,
+          pre.saveFailOrSuccessOption != curr.saveFailOrSuccessOption,
       listener: (context, state) {
-        state.noteFailOrSuccessOption.fold(
+        state.saveFailOrSuccessOption.fold(
           () => null,
           (either) => either.fold(
             (failure) => RoundedFlushBar.createRoundedErrorBar(
@@ -102,6 +103,7 @@ class _BuildScaffold extends StatelessWidget {
               child: Column(
                 children: const [
                   BodyField(),
+                  ColourField(),
                 ],
               ),
             ),

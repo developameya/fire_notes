@@ -75,7 +75,7 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
   Future<void> _onSaved(_Saved event, Emitter<NoteFormState> emit) async {
     Either<NoteFailure, Unit>? failureOrSuccess;
     emit(state.copyWith(isSaving: true, saveFailOrSuccessOption: none()));
-
+    //Please make sure which failure option is being observed.
     if (state.note.failureOption.isNone()) {
       state.isEditing
           ? failureOrSuccess = await _noteRepo.update(state.note)
