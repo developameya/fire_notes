@@ -21,4 +21,20 @@ extension RoundedFlushBar on FlushbarHelper {
       margin: const EdgeInsets.all(8.0),
     );
   }
+
+  /// Get a flushbar that can receive a user action through a button.
+  static Flushbar createRoundedActionBar(
+      {required String message,
+      required Widget button,
+      String? title,
+      Duration duration = const Duration(seconds: 3)}) {
+    return Flushbar(
+      title: title,
+      message: message,
+      duration: duration,
+      mainButton: button,
+      borderRadius: BorderRadius.circular(10.0),
+      margin: const EdgeInsets.all(8.0),
+    );
+  }
 }

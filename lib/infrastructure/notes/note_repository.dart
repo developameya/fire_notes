@@ -99,7 +99,8 @@ class NoteRepository implements INoteRepository {
     final userDoc = await _db.userDocument();
     final noteDTO = NoteDTO.fromDomain(note);
     try {
-      await userDoc.noteCollection.doc(noteDTO.uid).update(noteDTO.toJson());
+      final noteJson = noteDTO.toJson();
+      await userDoc.noteCollection.doc(noteDTO.uid).update(noteJson);
 
       return right(unit);
     } on FirebaseException catch (error) {

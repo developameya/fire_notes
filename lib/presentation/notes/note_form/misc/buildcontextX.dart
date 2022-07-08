@@ -4,8 +4,8 @@ import 'package:kt_dart/collection.dart';
 import 'package:provider/provider.dart';
 
 extension FormTodoX on BuildContext {
-  KtList<TodoItemPremitive> get formTodos =>
+  KtList<TodoItemPremitive> get getFormTodos =>
       Provider.of<FormTodos>(this, listen: false).value;
-  set formTodos(KtList<TodoItemPremitive> value) =>
+  set setFormTodos(KtList<TodoItemPremitive> value) =>
       Provider.of<FormTodos>(this, listen: false).value = value;
 }

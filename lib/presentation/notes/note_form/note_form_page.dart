@@ -11,7 +11,8 @@ import '../../../domain/notes/note.dart';
 import '../../../injection.dart';
 import 'widgets/body_field.dart';
 import 'widgets/colour_field.dart';
-import 'widgets/todo_tile.dart';
+import 'widgets/todo_list.dart';
+import 'widgets/add_todo_tile.dart';
 
 class NoteFormPage extends StatelessWidget {
   final Note note;
@@ -109,7 +110,8 @@ class _BuildScaffold extends StatelessWidget {
                   children: const [
                     BodyField(),
                     ColourField(),
-                    TodoTile(),
+                    TodoList(),
+                    AddTodoTile(),
                   ],
                 ),
               ),

@@ -13,6 +13,7 @@ part 'data_transfer_objects.g.dart';
 @freezed
 abstract class NoteDTO implements _$NoteDTO {
   const NoteDTO._();
+
   const factory NoteDTO({
     // ignore: invalid_annotation_target
     @JsonKey(ignore: true) String? uid,
@@ -23,16 +24,16 @@ abstract class NoteDTO implements _$NoteDTO {
   }) = _NoteDTO;
 
   //helper methods
+
   factory NoteDTO.fromDomain(Note note) => NoteDTO(
         uid: note.uid.getOrCrash(),
         body: note.body.getOrCrash(),
         todos: note.todos
             .getOrCrash()
-            .asList()
             .map(
               (todoItem) => TodoItemDTO.fromDomain(todoItem),
             )
-            .toList(),
+            .asList(),
         color: note.color.getOrCrash().value,
         //TODO: This line might throw an exception at runtime.
         serverTimeStamp: FieldValue.serverTimestamp(),

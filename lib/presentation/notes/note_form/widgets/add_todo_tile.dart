@@ -5,8 +5,8 @@ import 'package:kt_dart/kt.dart';
 import 'package:fire_notes/presentation/notes/note_form/misc/buildcontextX.dart';
 import '../../../../application/notes/form/note_form_bloc.dart';
 
-class TodoTile extends StatelessWidget {
-  const TodoTile({Key? key}) : super(key: key);
+class AddTodoTile extends StatelessWidget {
+  const AddTodoTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class TodoTile extends StatelessWidget {
       listenWhen: (pre, curr) => pre.isEditing != curr.isEditing,
       listener: (context, state) {
         //If we are editing a note instead of creating a new one, here we are populating the local presentation state of of todos with the todo from the infrascture.
-        context.formTodos = state.note.todos.value.fold(
+        context.setFormTodos = state.note.todos.value.fold(
           (falilure) => listOf<TodoItemPremitive>(),
           (todoItemList) => todoItemList.map(
             (todoItem) => TodoItemPremitive.fromDomain(todoItem),
@@ -31,11 +31,11 @@ class TodoTile extends StatelessWidget {
           ),
           title: const Text('Add a todo'),
           onTap: () {
-            context.formTodos =
-                context.formTodos.plusElement(TodoItemPremitive.empty());
+            context.setFormTodos =
+                context.getFormTodos.plusElement(TodoItemPremitive.empty());
             context.read<NoteFormBloc>().add(
                   NoteFormEvent.todosChanged(
-                    context.formTodos,
+                    context.getFormTodos,
                   ),
                 );
           },

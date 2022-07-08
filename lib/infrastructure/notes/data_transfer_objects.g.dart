@@ -18,7 +18,7 @@ _$_NoteDTO _$$_NoteDTOFromJson(Map<String, dynamic> json) => _$_NoteDTO(
 Map<String, dynamic> _$$_NoteDTOToJson(_$_NoteDTO instance) =>
     <String, dynamic>{
       'body': instance.body,
-      'todos': instance.todos,
+      'todos': instance.todos.map((e) => e.toJson()).toList(),
       'color': instance.color,
       'serverTimeStamp': instance.serverTimeStamp,
     };
