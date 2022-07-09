@@ -136,13 +136,12 @@ class _PasswordField extends StatelessWidget {
       obscureText: true,
       onChanged: (value) => bloc.add(SignInFormEvent.passwordChanged(value)),
       validator: (_) => bloc.state.password.value.fold(
-        (failure) => failure.maybeMap(
-          auth: (value) => value.failure.maybeMap(
-            shortPassword: (_) => 'Short Password',
-            orElse: () => null,
-          ),
-          orElse: () => null,
-        ),
+        (failure) => failure.getAuthFailure.fold(
+            () => null,
+            (some) => some.maybeMap(
+                  shortPassword: (_) => 'Short Password',
+                  orElse: () => null,
+                )),
         (r) => null,
       ),
     );
@@ -167,12 +166,12 @@ class _EmailField extends StatelessWidget {
       onChanged: (value) => bloc.add(SignInFormEvent.emailChanged(value)),
       //If we use 'map' on 'f(failure)' then we've to return a function for faliure of each object. Instead, we'll use 'maybeMap' where, we return a function for the failure of the current object and return a common function for every other failure.
       validator: (_) => bloc.state.emailAddress.value.fold(
-        (f) => f.maybeMap(
-          auth: (value) => value.failure.maybeMap(
+        (f) => f.getAuthFailure.fold(
+          () => null,
+          (some) => some.maybeMap(
             invalidEmail: (value) => 'Invalid Email',
             orElse: () => null,
           ),
-          orElse: () => null,
         ),
         (_) => null,
       ),

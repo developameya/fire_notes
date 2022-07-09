@@ -32,14 +32,14 @@ class BodyField extends HookWidget {
                 ),
             validator: (_) =>
                 context.read<NoteFormBloc>().state.note.body.value.fold(
-                      (f) => f.maybeMap(
-                        notes: (value) => value.failure.maybeMap(
+                      (f) => f.getNoteFailure.fold(
+                        () => null,
+                        (notefailure) => notefailure.maybeMap(
                           empty: (_) => 'cannot be empty',
                           exceedingLength: (v) =>
                               'Exceeding length, Max: ${v.maxLength}',
                           orElse: () => null,
                         ),
-                        orElse: () => null,
                       ),
                       (_) => null,
                     ),

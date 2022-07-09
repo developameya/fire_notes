@@ -82,9 +82,9 @@ class _TodoTile extends HookWidget {
 
                   (f) => null,
                   (v) => v[index].name.value.fold(
-                        (failure) => failure.getNoteFailure.fold(
+                        (f) => f.getNoteFailure.fold(
                           () => null,
-                          (noteFailure) => noteFailure.maybeMap(
+                          (some) => some.maybeMap(
                             exceedingLength: (_) => 'Name too long',
                             empty: (_) => 'Cannot be empty',
                             multiline: (_) => 'Should be single line',
