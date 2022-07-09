@@ -5,6 +5,7 @@ import 'package:fire_notes/presentation/notes/note_form/misc/todoitem_presentati
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,10 @@ class TodoList extends StatelessWidget {
         builder: (context, formTodos, _) => ListView.builder(
           shrinkWrap: true,
           itemCount: formTodos.value.size,
-          itemBuilder: (context, index) => _TodoTile(index: index),
+          itemBuilder: (context, index) => _TodoTile(
+            index: index,
+            key: ValueKey(formTodos.value[index].uid),
+          ),
         ),
       ),
     );
@@ -55,58 +59,89 @@ class _TodoTile extends HookWidget {
     );
     final textEditingController =
         useTextEditingController(text: currentTodoItemPremitive.name);
-    return ListTile(
-      title: TextFormField(
-        decoration: const InputDecoration(
-          hintText: 'Todo',
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          counterText: '',
-        ),
-        maxLength: TodoName.maxLength,
-        controller: textEditingController,
-        onChanged: (todoStr) {
-          context.setFormTodos = context.getFormTodos.map(
-            (todoItemPremitive) => todoItemPremitive == currentTodoItemPremitive
-                ? todoItemPremitive.copyWith(name: todoStr)
-                : todoItemPremitive,
-          );
-          context.read<NoteFormBloc>().add(
-                NoteFormEvent.todosChanged(context.getFormTodos),
-              );
-        },
-        validator: (_) =>
-            context.read<NoteFormBloc>().state.note.todos.value.fold(
-                  // Failure stemming from the TodoList length should NOT be displayed by the individual TextFormFields
-
-                  (f) => null,
-                  (v) => v[index].name.value.fold(
-                        (f) => f.getNoteFailure.fold(
-                          () => null,
-                          (some) => some.maybeMap(
-                            exceedingLength: (_) => 'Name too long',
-                            empty: (_) => 'Cannot be empty',
-                            multiline: (_) => 'Should be single line',
-                            orElse: () => null,
-                          ),
-                        ),
-                        (_) => null,
-                      ),
-                ),
+    return Slidable(
+      endActionPane: ActionPane(
+        extentRatio: 0.20,
+        motion: const DrawerMotion(),
+        children: [
+          SlidableAction(
+            label: 'Delete',
+            icon: Icons.delete,
+            foregroundColor: Colors.red,
+            onPressed: (_) {
+              context.setFormTodos =
+                  context.getFormTodos.minusElement(currentTodoItemPremitive);
+              context.read<NoteFormBloc>().add(
+                    NoteFormEvent.todosChanged(context.getFormTodos),
+                  );
+            },
+          ),
+        ],
       ),
-      leading: Checkbox(
-        value: currentTodoItemPremitive.done,
-        onChanged: (value) {
-          context.setFormTodos = context.getFormTodos.map(
-            (todoItemPremitive) => todoItemPremitive == currentTodoItemPremitive
-                ? todoItemPremitive.copyWith(done: value!)
-                : todoItemPremitive,
-          );
-          context.read<NoteFormBloc>().add(
-                NoteFormEvent.todosChanged(context.getFormTodos),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+        child: ListTile(
+          title: TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Todo',
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              counterText: '',
+            ),
+            maxLength: TodoName.maxLength,
+            controller: textEditingController,
+            onChanged: (todoStr) {
+              context.setFormTodos = context.getFormTodos.map(
+                (todoItemPremitive) =>
+                    todoItemPremitive == currentTodoItemPremitive
+                        ? todoItemPremitive.copyWith(name: todoStr)
+                        : todoItemPremitive,
               );
-        },
+              context.read<NoteFormBloc>().add(
+                    NoteFormEvent.todosChanged(context.getFormTodos),
+                  );
+            },
+            validator: (_) =>
+                context.read<NoteFormBloc>().state.note.todos.value.fold(
+                      // Failure stemming from the TodoList length should NOT be displayed by the individual TextFormFields
+
+                      (f) => null,
+                      (v) => v[index].name.value.fold(
+                            (f) => f.getNoteFailure.fold(
+                              () => null,
+                              (some) => some.maybeMap(
+                                exceedingLength: (_) => 'Name too long',
+                                empty: (_) => 'Cannot be empty',
+                                multiline: (_) => 'Should be single line',
+                                orElse: () => null,
+                              ),
+                            ),
+                            (_) => null,
+                          ),
+                    ),
+          ),
+          leading: Checkbox(
+            value: currentTodoItemPremitive.done,
+            onChanged: (value) {
+              context.setFormTodos = context.getFormTodos.map(
+                (todoItemPremitive) =>
+                    todoItemPremitive == currentTodoItemPremitive
+                        ? todoItemPremitive.copyWith(done: value!)
+                        : todoItemPremitive,
+              );
+              context.read<NoteFormBloc>().add(
+                    NoteFormEvent.todosChanged(context.getFormTodos),
+                  );
+            },
+          ),
+        ),
       ),
     );
   }
