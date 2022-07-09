@@ -1,11 +1,21 @@
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'failures.freezed.dart';
 
 @immutable
 @freezed
-abstract class ValueFailure<T> with _$ValueFailure<T> {
+abstract class ValueFailure<T> implements _$ValueFailure<T> {
+  const ValueFailure._();
   const factory ValueFailure.auth(AuthValueFailure<T> failure) = _Auth<T>;
   const factory ValueFailure.notes(NotesValueFailure<T> failure) = _Notes<T>;
+  Option<NotesValueFailure<T>> get getNoteFailure => maybeMap(
+        notes: (f) => some(f.failure),
+        orElse: () => none(),
+      );
+  Option<AuthValueFailure<T>> get getAuthFailure => maybeMap(
+        auth: (f) => some(f.failure),
+        orElse: () => none(),
+      );
 }
 
 @immutable

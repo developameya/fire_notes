@@ -1,3 +1,4 @@
+import 'package:fire_notes/domain/notes/value_objects.dart';
 import 'package:fire_notes/presentation/notes/note_form/misc/buildcontextX.dart';
 import 'package:fire_notes/presentation/core/widgets/rounded_flush_bar.dart';
 import 'package:fire_notes/presentation/notes/note_form/misc/todoitem_presentation_classes.dart';
@@ -52,20 +53,61 @@ class _TodoTile extends HookWidget {
       index,
       (_) => TodoItemPremitive.empty(),
     );
+    final textEditingController =
+        useTextEditingController(text: currentTodoItemPremitive.name);
     return ListTile(
+      title: TextFormField(
+        decoration: const InputDecoration(
+          hintText: 'Todo',
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          counterText: '',
+        ),
+        maxLength: TodoName.maxLength,
+        controller: textEditingController,
+        onChanged: (todoStr) {
+          context.setFormTodos = context.getFormTodos.map(
+            (todoItemPremitive) => todoItemPremitive == currentTodoItemPremitive
+                ? todoItemPremitive.copyWith(name: todoStr)
+                : todoItemPremitive,
+          );
+          context.read<NoteFormBloc>().add(
+                NoteFormEvent.todosChanged(context.getFormTodos),
+              );
+        },
+        validator: (_) =>
+            context.read<NoteFormBloc>().state.note.todos.value.fold(
+                  // Failure stemming from the TodoList length should NOT be displayed by the individual TextFormFields
+
+                  (f) => null,
+                  (v) => v[index].name.value.fold(
+                        (failure) => failure.getNoteFailure.fold(
+                          () => null,
+                          (noteFailure) => noteFailure.maybeMap(
+                            exceedingLength: (_) => 'Name too long',
+                            empty: (_) => 'Cannot be empty',
+                            multiline: (_) => 'Should be single line',
+                            orElse: () => null,
+                          ),
+                        ),
+                        (_) => null,
+                      ),
+                ),
+      ),
       leading: Checkbox(
-          value: currentTodoItemPremitive.done,
-          onChanged: (value) {
-            context.setFormTodos = context.getFormTodos.map(
-              (todoItemPremitive) =>
-                  todoItemPremitive == currentTodoItemPremitive
-                      ? todoItemPremitive.copyWith(done: value!)
-                      : todoItemPremitive,
-            );
-            context.read<NoteFormBloc>().add(
-                  NoteFormEvent.todosChanged(context.getFormTodos),
-                );
-          }),
+        value: currentTodoItemPremitive.done,
+        onChanged: (value) {
+          context.setFormTodos = context.getFormTodos.map(
+            (todoItemPremitive) => todoItemPremitive == currentTodoItemPremitive
+                ? todoItemPremitive.copyWith(done: value!)
+                : todoItemPremitive,
+          );
+          context.read<NoteFormBloc>().add(
+                NoteFormEvent.todosChanged(context.getFormTodos),
+              );
+        },
+      ),
     );
   }
 }

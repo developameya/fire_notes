@@ -113,8 +113,8 @@ class __$$_AuthCopyWithImpl<T, $Res> extends _$ValueFailureCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_Auth<T> implements _Auth<T> {
-  const _$_Auth(this.failure);
+class _$_Auth<T> extends _Auth<T> {
+  const _$_Auth(this.failure) : super._();
 
   @override
   final AuthValueFailure<T> failure;
@@ -204,8 +204,9 @@ class _$_Auth<T> implements _Auth<T> {
   }
 }
 
-abstract class _Auth<T> implements ValueFailure<T> {
+abstract class _Auth<T> extends ValueFailure<T> {
   const factory _Auth(final AuthValueFailure<T> failure) = _$_Auth<T>;
+  const _Auth._() : super._();
 
   AuthValueFailure<T> get failure => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -255,8 +256,8 @@ class __$$_NotesCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_Notes<T> implements _Notes<T> {
-  const _$_Notes(this.failure);
+class _$_Notes<T> extends _Notes<T> {
+  const _$_Notes(this.failure) : super._();
 
   @override
   final NotesValueFailure<T> failure;
@@ -346,8 +347,9 @@ class _$_Notes<T> implements _Notes<T> {
   }
 }
 
-abstract class _Notes<T> implements ValueFailure<T> {
+abstract class _Notes<T> extends ValueFailure<T> {
   const factory _Notes(final NotesValueFailure<T> failure) = _$_Notes<T>;
+  const _Notes._() : super._();
 
   NotesValueFailure<T> get failure => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
