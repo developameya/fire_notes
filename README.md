@@ -1,7 +1,7 @@
 # Fire Notes<br>
 
-A note app created with Flutter API to demonstrate Domain Driven Design pattern.
-----
+<p>A note app created with Flutter API to demonstrate Domain Driven Design pattern.<p>
+
 ## Usage
 
 1. To install Flutter, you can follow the official documentation:<br>
