@@ -1,4 +1,4 @@
-# Fire Notes
+# Fire Notes<br>
 
 A note app created with Flutter API to demonstrate Domain Driven Design pattern.
 ----
