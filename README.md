@@ -1,16 +1,12 @@
-# fire_notes
+# Fire Notes
 
-A new Flutter project.
+A note app created with Flutter API to demonstrate Domain Driven Design pattern.
+----
+## Usage
 
-## Getting Started
+1. To install Flutter, you can follow the official documentation:<br>
+[Flutter installtion guide](https://docs.flutter.dev/get-started/install)
 
-This project is a starting point for a Flutter application.
+2. To install Android Studio, you can follow the official documentation: <br>
+[Android Studio installation guide](https://developer.android.com/studio/install)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
