@@ -24,10 +24,10 @@
 
 ## Technology
 
-1. Fluter Bloc<br>
-   - Widgets that make it easy to integrate blocs and cubits into Flutter.
+1. Fluter Bloc
+    Widgets that make it easy to integrate blocs and cubits into Flutter.
+
 2. GetIt
-    - Simple direct Service Locator that allows to decouple the interface from a concrete implementation and to access the concrete implementation from everywhere in your App.
 3. Flutter Hooks
 4. Freezed
 5. JSON Serializable
