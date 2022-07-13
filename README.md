@@ -25,7 +25,7 @@
 ## Technology
 
 1. Fluter Bloc
-    Widgets that make it easy to integrate blocs and cubits into Flutter.
+    - Widgets that make it easy to integrate blocs and cubits into Flutter.
 
 2. GetIt
 3. Flutter Hooks
