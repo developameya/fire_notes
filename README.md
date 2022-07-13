@@ -26,17 +26,31 @@
 
 1. Fluter Bloc
     - Widgets that make it easy to integrate blocs and cubits into Flutter.
-
 2. GetIt
+    - Simple direct Service Locator that allows to decouple the interface from a concrete implementation and to access the concrete implementation from everywhere in your App.
 3. Flutter Hooks
+    - Hooks are a new kind of object that manage the life-cycle of a Widget. They exist for one reason: increase the code-sharing between widgets by removing duplicates.
 4. Freezed
+    - code generator for data-classes/unions/pattern-matching/cloning.
 5. JSON Serializable
-6. KT collection
+    - Automatically generate code for converting to and from JSON by annotating Dart classes.
+6. KT dart
+    - This project is a port of Kotlin's Kotlin Standard library for Dart/Flutter projects.
 7. Equatable
+    - An abstract class that helps to implement equality without needing to explicitly override == and hashCode.
 8. Dartz
+    - Functional Programming in Dart. Purify your Dart code using efficient immutable data structures, monads, lenses and other FP tools.
 9. Firebase
-10. Go Router
-11. Lottie
-12. RxDart
-13. UUID
-14. Build Runner
+    - A Flutter plugin to use the Firebase Core API, which enables connecting to multiple Firebase apps.
+10. Firebase Authentication
+    - A Flutter plugin to use the Firebase Authentication API.
+11. Go Router
+    - A declarative router for Flutter based on Navigation 2 supporting deep linking, data-driven routes and more.
+12. Lottie
+    - Render After Effects animations natively on Flutter.
+13. RxDart
+    - RxDart is an implementation of the popular reactiveX api for asynchronous programming, leveraging the native Dart Streams api.
+14. UUID
+    - RFC4122 (v1, v4, v5) UUID Generator and Parser for all Dart platforms.
+15. Build Runner
+    - Tools to write binaries that run builders.
